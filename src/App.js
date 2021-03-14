@@ -1,23 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import TabBar from "./components/TabBar"
+import BookBody from "./components/BookBody"
+import React, { useState } from 'react';
+
 
 function App() {
+  const [count, setCount] = useState(1);
+
+  const onCountChange = (value) => {
+      setCount(value)
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TabBar count={count} onCountChange={onCountChange}/>
+      {count === 1 ? <BookBody /> :
+      <div style={{
+        display: "flex",
+        width: "100%",
+        backgroundColor: "white",
+        flexDirection: "column"
+      }}>
+          <div style={{
+              height: "100px",
+              padding: "5px",
+              borderBottom: "1px solid white"
+          }}>
+          </div>
+             {count === 0 ? "Students" : "Settings"}
+      </div>}
     </div>
   );
 }
